@@ -1,0 +1,20 @@
+  <div class="title-block">
+    <h3 class="title pull-left">
+      Account page <span class="sparkline bar"></span>
+    </h3>
+    <div class="pull-right">
+      <button class="btn-sm btn btn-primary-outline">
+        <i class="fa fa-refresh" (click)="onRefresh()"></i>
+      </button>
+    </div>
+  </div>
+  <section class="section">
+    <div class="row text-center" *ngIf="!isLoaded">
+      <wfm-loader></wfm-loader>
+    </div>
+    <div class="row" *ngIf="isLoaded">
+      <wfm-bill-card [bill]="bill" [currency]="currency" ></wfm-bill-card>
+      <wfm-currency [currency]="currency"></wfm-currency>
+    </div>
+  </section>
+

@@ -1,0 +1,67 @@
+<p class="text-xs-center">Enter for work</p>
+<div
+  @fade
+  class="alert alert-{{message.type}}"
+  *ngIf="message.text"
+>
+  {{ message.text }}
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <div
+    class="form-group"
+    [ngClass] = "{'has-error': form.get('email').invalid && form.get('email').touched}"
+  >
+    <label for="email">Email</label>
+    <input
+      formControlName="email"
+      type="text"
+      class="form-control underlined"
+      id="email"
+      placeholder="Email"
+    >
+  <span
+    class="form-help-text"
+    *ngIf="form.get('email').invalid && form.get('email').touched"
+  >
+    <span *ngIf="form.get('email')['errors']['required']">Email should not be empty</span>
+    <span *ngIf="form.get('email')['errors']['email']">Enter a valid email</span>
+  </span>
+  </div>
+  <div
+    [ngClass] = "{'has-error': form.get('password').invalid && form.get('password').touched}"
+    class="form-group"
+  >
+    <label for="password">Password</label>
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control underlined"
+      id="password"
+      placeholder="Password"
+    >
+  <span
+    *ngIf="form.get('password').invalid && form.get('password').touched"
+    class="form-help-text"
+  >
+    <span *ngIf="form.get('password')['errors']['required']">Password should not be empty</span>
+    <span *ngIf="form.get('password')['errors']['minlength']">
+      Password length min {{ form.get('password')['errors']['minlength']['requiredLength'] }}
+      Currently entered {{ form.get('password')['errors']['minlength']['actualLength'] }}
+    </span>
+  </span>
+  </div>
+
+  <div class="form-group">
+    <button
+      type="submit" class="btn btn-block btn-primary"
+      [disabled] = "form.invalid"
+    >
+      Enter
+    </button>
+  </div>
+  <div class="form-group">
+    <p class="text-muted text-xs-center">
+      Not account? <a [routerLink]="'/registration'">Registration!</a>
+    </p>
+  </div>
+</form>
